@@ -12,7 +12,22 @@
       font-family: 'Georgia', serif;
       background: #fff0f5;
       overflow: hidden;
-      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+      animation: shimmer 8s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes shimmer {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+      100% { transform: scale(1) rotate(360deg); opacity: 0.3; }
     }
 
     .container {
@@ -22,20 +37,20 @@
       height: 100%;
       text-align: center;
       padding: 2rem;
-      z-index: 1;
       position: relative;
+      z-index: 2;
     }
 
     .message {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       padding: 2rem 3rem;
       border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      animation: fadeIn 2s ease-in-out;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: pulse 3s ease-in-out infinite;
     }
 
     .message h1 {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-bottom: 1rem;
       color: #b03060;
     }
@@ -46,41 +61,56 @@
       line-height: 1.6;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
     }
 
-    .flower {
+    .petal {
       position: absolute;
-      width: 80px;
-      height: 80px;
-      background-image: url('https://cdn.pixabay.com/photo/2017/10/25/14/06/rose-2881041_960_720.png');
-      background-size: contain;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://cdn.pixabay.com/photo/2016/04/14/20/11/petal-1329723_960_720.png');
+      background-size: cover;
       background-repeat: no-repeat;
-      opacity: 0.4;
-      animation: float 20s linear infinite;
+      opacity: 0.5;
+      animation: float linear infinite;
     }
-
-    .flower:nth-child(1) { top: 10%; left: 5%; animation-duration: 25s; }
-    .flower:nth-child(2) { top: 40%; left: 85%; animation-duration: 30s; }
-    .flower:nth-child(3) { top: 70%; left: 10%; animation-duration: 22s; }
-    .flower:nth-child(4) { top: 20%; left: 60%; animation-duration: 27s; }
-    .flower:nth-child(5) { top: 80%; left: 75%; animation-duration: 24s; }
 
     @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3; }
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
+
+    /* Create multiple petals with different animation delays */
+    .petal:nth-child(1)  { left: 10%; animation-duration: 25s; animation-delay: 0s; }
+    .petal:nth-child(2)  { left: 25%; animation-duration: 22s; animation-delay: 5s; }
+    .petal:nth-child(3)  { left: 40%; animation-duration: 28s; animation-delay: 3s; }
+    .petal:nth-child(4)  { left: 55%; animation-duration: 20s; animation-delay: 4s; }
+    .petal:nth-child(5)  { left: 70%; animation-duration: 26s; animation-delay: 2s; }
+    .petal:nth-child(6)  { left: 85%; animation-duration: 23s; animation-delay: 1s; }
+    .petal:nth-child(7)  { left: 50%; animation-duration: 30s; animation-delay: 6s; }
+
   </style>
 </head>
 <body>
-  <div class="flower"></div>
-  <div class="flower"></div>
-  <div class="flower"></div>
-  <div class="flower"></div>
-  <div class="flower"></div>
+  <!-- Floating petals -->
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
 
   <div class="container">
     <div class="message">
